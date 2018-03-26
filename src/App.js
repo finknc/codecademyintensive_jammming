@@ -1,18 +1,25 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
 
-class App extends Component {
+import { SearchBar } from './components/SearchBar/SearchBar';
+import { TrackList } from './components/TrackList/TrackList';
+
+class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <SearchBar />
+        <div className="App-playlist">
+        <div className="SearchResults">
+          <h2>Results</h2>
+          <TrackList />
+        </div>
+          <div className="Playlist">
+            <input defaultValue='New Playlist' />
+            <TrackList />
+            <a className="Playlist-save">SAVE TO SPOTIFY</a>
+          </div>
+        </div>
       </div>
     );
   }
