@@ -6,9 +6,9 @@ export class TrackList extends React.Component {
   render() {
     return (
       <div className="TrackList">
-        <Track />
-        <Track />
-        <Track />
+        <Track trackActionSymbol={this.props.trackActionSymbol} />
+        <Track trackActionSymbol={this.props.trackActionSymbol} />
+        <Track trackActionSymbol={this.props.trackActionSymbol} />
       </div>
     );
   }

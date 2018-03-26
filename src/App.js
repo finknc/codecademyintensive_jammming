@@ -12,11 +12,11 @@ class App extends React.Component {
         <div className="App-playlist">
         <div className="SearchResults">
           <h2>Results</h2>
-          <TrackList />
+          <TrackList trackActionSymbol="+" />
         </div>
           <div className="Playlist">
-            <input defaultValue='New Playlist' />
-            <TrackList />
+            <input defaultValue="New Playlist" />
+            <TrackList trackActionSymbol="-" />
             <a className="Playlist-save">SAVE TO SPOTIFY</a>
           </div>
         </div>

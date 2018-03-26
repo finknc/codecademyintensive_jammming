@@ -8,7 +8,7 @@ export class Track extends React.Component {
           <h3>Stronger</h3>
           <p>Britney Spears | Oops!... I Did It Again</p>
         </div>
-        <a className="Track-action">-</a>
+        <a className="Track-action">{this.props.trackActionSymbol}</a>
       </div>
     );
   }
