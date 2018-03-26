@@ -2,7 +2,8 @@ import React from 'react';
 import './App.css';
 
 import { SearchBar } from './components/SearchBar/SearchBar';
-import { TrackList } from './components/TrackList/TrackList';
+import { SearchResults } from './components/SearchResults/SearchResults';
+import { Playlist } from './components/Playlist/Playlist';
 
 class App extends React.Component {
   render() {
@@ -10,15 +11,8 @@ class App extends React.Component {
       <div className="App">
         <SearchBar />
         <div className="App-playlist">
-        <div className="SearchResults">
-          <h2>Results</h2>
-          <TrackList trackActionSymbol="+" />
-        </div>
-          <div className="Playlist">
-            <input defaultValue="New Playlist" />
-            <TrackList trackActionSymbol="-" />
-            <a className="Playlist-save">SAVE TO SPOTIFY</a>
-          </div>
+          <SearchResults />
+          <Playlist />
         </div>
       </div>
     );
