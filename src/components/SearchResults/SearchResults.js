@@ -8,7 +8,10 @@ export class SearchResults extends React.Component {
     return (
       <div className="SearchResults">
         <h2>Results</h2>
-        <TrackList tracks={this.props.searchResult} trackActionSymbol="+" />
+        <TrackList
+          tracks={this.props.searchResults}
+          trackActionSymbol="+"
+          trackAction={this.props.addToPlaylist} />
       </div>
     );
   }

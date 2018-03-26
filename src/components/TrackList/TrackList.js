@@ -10,9 +10,10 @@ export class TrackList extends React.Component {
         {this.props.tracks.map(track => {
           return (
             <Track
-              id={track.id}
+              key={track.id}
               track={track}
-              trackActionSymbol={this.props.trackActionSymbol} />
+              trackActionSymbol={this.props.trackActionSymbol}
+              trackAction={this.props.trackAction} />
           );
         })}
       </div>
