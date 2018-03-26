@@ -7,9 +7,14 @@ export class TrackList extends React.Component {
   render() {
     return (
       <div className="TrackList">
-        <Track trackActionSymbol={this.props.trackActionSymbol} />
-        <Track trackActionSymbol={this.props.trackActionSymbol} />
-        <Track trackActionSymbol={this.props.trackActionSymbol} />
+        {this.props.tracks.map(track => {
+          return (
+            <Track
+              id={track.id}
+              track={track}
+              trackActionSymbol={this.props.trackActionSymbol} />
+          );
+        })}
       </div>
     );
   }

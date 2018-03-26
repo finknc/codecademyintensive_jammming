@@ -6,8 +6,8 @@ export class Track extends React.Component {
     return (
       <div className="Track">
         <div className="Track-information">
-          <h3>Stronger</h3>
-          <p>Britney Spears | Oops!... I Did It Again</p>
+          <h3>{this.props.track.title}</h3>
+          <p>{this.props.track.artist} | {this.props.track.album}</p>
         </div>
         <a className="Track-action">{this.props.trackActionSymbol}</a>
       </div>
