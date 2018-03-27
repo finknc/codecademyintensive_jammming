@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import Spotify from './util/Spotify';
+import Spotify from '../../util/Spotify';
 
-import { SearchBar } from './components/SearchBar/SearchBar';
-import { SearchResults } from './components/SearchResults/SearchResults';
-import { Playlist } from './components/Playlist/Playlist';
+import { SearchBar } from '../SearchBar/SearchBar';
+import { SearchResults } from '../SearchResults/SearchResults';
+import { Playlist } from '../Playlist/Playlist';
 
 class App extends React.Component {
   constructor(props) {
@@ -32,8 +32,14 @@ class App extends React.Component {
   }
 
   addTrackToPlaylist(track) {
+    let trackIsInList = false;
     const currentPlaylist = this.state.playlist;
-    if (currentPlaylist.indexOf(track) === -1){
+    currentPlaylist.forEach(tt => {
+      if (tt.id === track.id) {
+        trackIsInList = true;
+      }
+    })
+    if (!trackIsInList){
       currentPlaylist.push(track);
       this.setState({ playlist: currentPlaylist });
     }
@@ -42,7 +48,7 @@ class App extends React.Component {
   removeTrackFromPlaylist(track) {
     const currentPlaylist = this.state.playlist;
     this.setState({
-      playlist: currentPlaylist.filter(tt => tt !== track)
+      playlist: currentPlaylist.filter(tt => tt.id !== track.id)
     });
   }
 
