@@ -12,7 +12,9 @@ export class Playlist extends React.Component {
           tracks={this.props.playlist}
           trackActionSymbol="-"
           trackAction={this.props.removeFromPlaylist} />
-        <a className="Playlist-save">SAVE TO SPOTIFY</a>
+        <a
+          className="Playlist-save"
+          onClick={this.props.savePlaylist}>SAVE TO SPOTIFY</a>
       </div>
     );
   }
