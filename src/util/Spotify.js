@@ -4,7 +4,11 @@ const redirectUri = 'http://localhost:3000/'; //The whitelisted return uri
 let token; //The access token will be stored in this variable
 let expiration; //The expiration date witll be stored in this variable
 
-
+/**
+ * Get the value of a parameter from the url query
+ * @param {str} name The name of the parameter to extract
+ * @return {str} The value of the parameter
+ */
 function getUrlParameter(name) {
     var regex = new RegExp(name + '=([^&#]*)');
     var results = regex.exec(window.location.href);
