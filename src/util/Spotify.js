@@ -21,9 +21,9 @@ const Spotify = {
     // Check if both the token and the expiration variables are set
     if (token && expiration) {
       /*
-        If the token and expiration is set we check so see if the token is
-        still valid
-      */
+       If the token and expiration is set we check so see if the token is
+       still valid
+       */
       const currentDate = new Date().getTime();
       if (currentDate < expiration)
       {
@@ -36,10 +36,10 @@ const Spotify = {
     const expiresIn = getUrlParameter('expires_in');
 
     /*
-      If the access token and the expiration in seconds was obtained then we
-      calculate the expiration date, otherwise, we call the Spotify API to
-      retrive a new token
-    */
+     If the access token and the expiration in seconds was obtained then we
+     calculate the expiration date, otherwise, we call the Spotify API to
+     retrive a new token
+     */
     if (token && expiresIn) {
       expiration = new Date().getTime() + parseInt(expiresIn, 10) * 1000;
     }
@@ -64,6 +64,10 @@ const Spotify = {
       }
     }).then(response => response.json()).then(jsonResponse => {
       if (jsonResponse.tracks) {
+        /*
+         We return the tracks in the json data as an array of objects with
+         information about each track
+         */
         return jsonResponse.tracks.items.map(track => ({
           id: track.id,
           artist: track.artists.map(artist => artist.name).join(', '),
@@ -82,18 +86,22 @@ const Spotify = {
    * @return {Promise} A promise returning a boolean indicating whether or not the request was a success
    */
   savePlaylist: function(playlistName, tracks) {
-    if (!playlistName || !tracks || tracks.length === 0) {
+    // Check if a playlist name and at least one track has been provided
+    if (!playlistName || !tracks.length || tracks.length === 0) {
+      // We return a promise that returns false so it can be handled externally
       return new Promise(function(resolve, reject){
         resolve(false);
       }).then(response => response);
     }
     const accessToken = Spotify.getToken();
 
+    // First we call the api to get id of the user that is logged in
     return fetch('https://api.spotify.com/v1/me', {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }
     }).then(response => response.json()).then(jsonUserResponse => {
+      // The next step is to create the playlist for the user
       return fetch(`https://api.spotify.com/v1/users/${jsonUserResponse.id}/playlists`,{
         method: 'POST',
         headers: {
@@ -102,18 +110,18 @@ const Spotify = {
         },
         body: JSON.stringify({ name: playlistName })
       }).then(response => response.json()).then(jsonPlaylistResponse => {
-        const tracksUris = tracks.map(track => track.uri);
+        // The last step is to add the tracks to the newly created playlist
         return fetch(`https://api.spotify.com/v1/users/${jsonUserResponse.id}/playlists/${jsonPlaylistResponse.id}/tracks`,{
           method: 'POST',
           headers: {
             Authorization: `Bearer ${accessToken}`,
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ uris: tracksUris })
+          body: JSON.stringify({ uris: tracks.map(track => track.uri) })
         }).then(response => true);
       });
     });
   }
 }
 
-export default Spotify;
+export default Spotify; // Export the Spotify object as default
