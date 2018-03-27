@@ -21,7 +21,10 @@ class App extends React.Component {
   }
 
   searchSpotify(term) {
-    this.setState({ searchResults: Spotify.search(term) });
+    Spotify.search(term).then(tracks => {
+      console.log(tracks);
+      this.setState({ searchResults:  tracks});
+    });
   }
 
   addTrackToPlaylist(track) {
@@ -42,7 +45,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <SearchBar searchSpotify={this.searchSpotify} />
+        <SearchBar
+          searchSpotify={this.searchSpotify} />
         <div className="App-playlist">
           <SearchResults
             searchResults={this.state.searchResults}
