@@ -2,7 +2,6 @@ const clientId = '6769a07882f043dcb71142a379cea2c7'; //The client ID oif the app
 const redirectUri = 'http://localhost:3000/'; //The whitelisted return uri
 
 let token; //The access token will be stored in this variable
-let expiration; //The expiration date witll be stored in this variable
 
 /**
  * Get the value of a parameter from the url query
@@ -22,17 +21,10 @@ const Spotify = {
    * @return {str} The access token
    */
   getToken() {
-    // Check if both the token and the expiration variables are set
-    if (token && expiration) {
-      /*
-       If the token and expiration is set we check so see if the token is
-       still valid
-       */
-      const currentDate = new Date().getTime();
-      if (currentDate < expiration)
-      {
-        return token;
-      }
+    // Check if the token variable is set
+    if (token) {
+      // If the token is set we return it
+      return token;
     }
 
     // Check if the url contains the access token and the expiration in seconds
@@ -45,7 +37,8 @@ const Spotify = {
      retrive a new token
      */
     if (token && expiresIn) {
-      expiration = new Date().getTime() + parseInt(expiresIn, 10) * 1000;
+      window.setTimeout(() => token = '', parseInt(expiresIn * 1000, 10));
+      window.history.pushState('Access Token', null, '/');
     }
     else {
       const authorizeUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${redirectUri}&scope=playlist-modify-public`;
